@@ -17,6 +17,10 @@
 # limitations under the License.
 #
 
+def whyrun_supported?
+  true
+end
+
 def load_current_resource
   @dmgpkg = Chef::Resource::DmgPackage.new(new_resource.name)
   @dmgpkg.app(new_resource.app)
@@ -64,6 +68,7 @@ action :install do
     end
 
     execute "hdiutil detach '/Volumes/#{volumes_dir}'"
+    new_resource.updated_by_last_action(true)
   end
 end
 
